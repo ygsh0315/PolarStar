@@ -756,7 +756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Earth: {fileID: 2091461352}
   speed: 5
-  gravityPower: -10
+  gravityPower: 10
   gravity: {x: 0, y: 0, z: 0}
   gravityDir: {x: 0, y: 0, z: 0}
   jumpPower: 5
