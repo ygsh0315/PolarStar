@@ -37,10 +37,12 @@ public class PlayerMove : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         gravityDir = (Earth.transform.position - transform.position).normalized;
-        gravity += gravityPower * gravityDir * Time.deltaTime;
+        gravity += -gravityPower * gravityDir * Time.deltaTime;
+
         Vector3 dir = new Vector3(h, 0, v);
         dir.Normalize();
         dir = Camera.main.transform.TransformDirection(dir);
+
         transform.up = -gravityDir;
         if (cc.collisionFlags == CollisionFlags.Below)
         {
