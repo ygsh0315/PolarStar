@@ -4,63 +4,77 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    // 지구
-    public GameObject Earth;
+    public GameObject Planet;
 
-    //필요속성 : 이동속도
-    public float speed = 5;
+    public float speed = 5f;
+    public float jumpPower = 1.2f;
 
-    //필요속성 Character Controller
-    CharacterController cc;
+    float gravity = 100;
+    bool OnGround = false;
 
-    //필요속성 : 중력
-    public float gravityPower = 10;
+    float distanceToGround;
+    Vector3 Groundnormal;
 
-    public Vector3 gravity = Vector3.zero;
+    private Rigidbody rb;
 
-    //필요속성 : 수직속도
-    public Vector3 gravityDir;
 
-    //필요속성 : 점프파워
-    public float jumpPower = 5;
-
-    int jumpCount = 0;
-    public int maxJumpCount = 2;
-    // Start is called before the first frame update
     void Start()
     {
-        cc = GetComponent<CharacterController>();
-
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        // Movement
+        float h = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
+        float v = Input.GetAxis("Vertical") * Time.deltaTime * speed;
 
-        gravityDir = (Earth.transform.position - transform.position).normalized;
-        gravity += gravityPower * gravityDir * Time.deltaTime;
+        transform.Translate(h, 0, v);
 
-        Vector3 dir = new Vector3(h, 0, v);
-        dir.Normalize();
-        dir = Camera.main.transform.TransformDirection(dir);
+        // Local Lotation
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.Rotate(0, 150 * Time.deltaTime, 0);
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            transform.Rotate(0, -150 * Time.deltaTime, 0);
+        }
 
-        transform.up = -gravityDir;
-        if (cc.collisionFlags == CollisionFlags.Below)
+        // Jump
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            gravityDir = Vector3.zero;
-            jumpCount = 0;
+            rb.AddForce(transform.up * 40000 * jumpPower * Time.deltaTime);
         }
-        else
+
+        // Ground Control
+        RaycastHit hit = new RaycastHit();
+        if(Physics.Raycast(transform.position, -transform.up, out hit, 10))
         {
-            //yVelocity +=  gravity * Time.deltaTime;
+            distanceToGround = hit.distance;
+            Groundnormal = hit.normal;
+
+            if(distanceToGround <= 0.2f)
+            {
+                OnGround = true;
+            }
+            else
+            {
+                OnGround = false;
+            }
         }
-        if (Input.GetButtonDown("Jump") && jumpCount < maxJumpCount)
+
+        // Vector3 and Rotation
+        Vector3 gravityDirection = (transform.position - Planet.transform.position).normalized;
+
+        if (OnGround == false)
         {
-            //yVelocity = jumpPower;
-            jumpCount++;
+            rb.AddForce(gravityDirection * -gravity);
         }
-        cc.Move(dir * speed * Time.deltaTime + gravity);
+
+        // 
+        Quaternion toRotation = Quaternion.FromToRotation(transform.up, Groundnormal) * transform.rotation;
+        transform.rotation = toRotation;
     }
 }
