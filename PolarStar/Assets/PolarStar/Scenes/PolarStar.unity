@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 3876d0e183013044aab5adba683217d7, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 9d873eafe7e49b54a927636e674a86c5, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.09181083, g: 0.09337396, b: 0.1518588, a: 1}
+  m_IndirectSpecularColor: {r: 0.03158737, g: 0.047248468, b: 0.12947229, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -370,6 +370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f2f1e7117b3f448a24c7ac38376ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starFactory: {fileID: 2609546142022711079, guid: 10fe1b0e04391bd438a9a815a223eff9, type: 3}
+  starList: []
   r: 200
 --- !u!4 &540610784
 Transform:
@@ -1121,6 +1123,8 @@ MonoBehaviour:
   player: {fileID: 963194228}
   angle: 15
   a: 50
+  radio: 300
+  starAmount: 100
 --- !u!4 &1186665074
 Transform:
   m_ObjectHideFlags: 0
