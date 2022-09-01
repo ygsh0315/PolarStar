@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 // 일정 시간마다 별똥별을 생성하고 싶다.
 // 화면 안에서 랜덤으로 위치를 지정하고 싶다.
@@ -32,27 +33,28 @@ public class KJH_StarManager : MonoBehaviour
         {
             // 별똥별 생성
             GameObject star = Instantiate(starFactory);
-            //transform.forward = player.forward;
-            //star.transform.forward = transform.forward;
-
-
-            //float angle = Random.Range(-10, 10);
-            //float y = Random.Range(5f, 20f);
-            //float posX = a * Mathf.Tan(angle);
-
-            //star.transform.position = transform.right * posX + transform.up * y + transform.forward * a;
-
-
-
-            //GameObject star2= Instantiate(starFactory2);
-
             star.transform.position = Random.onUnitSphere * radio;
-
-
-            // 일정 각도 안에서만 별똥별이 생성되고 싶다.     
-            // 각도를 알 때 위치를 알고 싶다.
-
             currentTime = 0f;
         }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            HTTPRequester hTTPRequester = new HTTPRequester();
+
+            hTTPRequester.url = "https://92c9-175-223-17-145.jp.ngrok.io/get_location";
+            hTTPRequester.requestType = RequestType.GET;
+            hTTPRequester.onComplete = CallBack;
+
+
+            HTTPManager.instance.SendRequest(hTTPRequester);
+        }
+    }
+
+    void CallBack(DownloadHandler downloadHandler)
+    {
+        Constellation co = JsonUtility.FromJson<Constellation>(downloadHandler.text);
+        print(co.name);
+        print(co.index);
+
     }
 }
