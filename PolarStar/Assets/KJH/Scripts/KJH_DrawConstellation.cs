@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public struct Pos1
+
 {
     public float ra;   // 적경
     public float dec;  // 위도
