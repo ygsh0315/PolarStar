@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Cassiopeia : MonoBehaviour
 {
-    public GameObject[] stars = new GameObject[5];   // 구성 별
+    List<GameObject> starList = new List<GameObject>();
     float[] ra = new float[] { 0.1024f, 0.4148f, 0.5806f, 1.2719f, 1.5603f };  // 구성 별들의 적경
     float[] dec = new float[] { 59.1621f, 56.3932f, 60.5010f, 60.2058f, 63.4638f };
     // 구성 별들의 적위
@@ -20,6 +20,10 @@ public class Cassiopeia : MonoBehaviour
 
     void Start()
     {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            starList.Add(transform.GetChild(i).gameObject);
+        }
         DrawStar();
 
     }
@@ -44,13 +48,13 @@ public class Cassiopeia : MonoBehaviour
     // 구면좌표를 직교좌표로
     void DrawStar()
     {
-        for (int i = 0; i < stars.Length; i++)
+        for (int i = 0; i < starList.Count; i++)
         {
             // 적경 : -> 디그리 -> 라디안으로
             ra[i] = ra[i] * -15f * Mathf.PI / 180;
 
             // 적위 : 디그리 -> 라디안
-            dec[i] = dec[i] * Mathf.PI / 180;
+            dec[i] = dec[i] * (Mathf.PI / 180);
             dec[i] = (Mathf.PI / 2) - dec[i];
 
             var rr = r * Mathf.Sin(dec[i]);
@@ -58,7 +62,7 @@ public class Cassiopeia : MonoBehaviour
             x = rr * Mathf.Sin(ra[i]);
             y = r * Mathf.Cos(dec[i]);
 
-            stars[i].transform.position = new Vector3(x, y, z);
+            starList[i].transform.position = new Vector3(x, y, z);
 
 
         }
