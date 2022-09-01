@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/KJH/Scenes/KJH_PolarStar.unity
+    guid: 11b223d25472ef44f838d004b1af17f4
+  - enabled: 1
+    path: Assets/OSW/PolarStar 1.unity
+    guid: 33df7dcd111b5c84b906650bea9abd04
   m_configObjects: {}
