@@ -31,7 +31,14 @@ public class KJH_ShootingStar : MonoBehaviour
 
         if(currentTime > removeTime)
         {
-            Destroy(gameObject);
+            // 크기를 줄이고 싶다.
+            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, Time.deltaTime);
+
+            if ((transform.localScale - Vector3.one).magnitude < 0.1f)
+            {
+                Destroy(gameObject);
+                currentTime = 0;
+            }
         }
 
         // x좌표를 랜덤 좌표로 지정한다.
