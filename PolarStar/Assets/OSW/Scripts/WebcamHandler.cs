@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class WebcamHandler : MonoBehaviour
 {
+
     // 카메라 화면을 표시할 게임 오브젝트
     // 유니티 Inspector에서 지정되어야 함
     // 주의! Renderer 컴퍼넌트를 포함해야 함
@@ -145,11 +146,9 @@ public class WebcamHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            
-
             HTTPRequester hTTPRequester = new HTTPRequester();
-
-            hTTPRequester.url = "https://d025-2001-2d8-e290-c6c6-58f2-92e-65e7-5cc2.jp.ngrok.io/get_picture"; //"https://f048-2001-2d8-e355-14f0-7459-a33-a1f0-ee5d.jp.ngrok.io/get_picture";//
+            hTTPRequester.url = "https://a1f2-110-70-51-37.jp.ngrok.io/get_picture";
+            //hTTPRequester.url = URL.instance.sendImage;
             hTTPRequester.requestType = RequestType.POST;
             hTTPRequester.postData = "aa";// GetTextureInfo();
             hTTPRequester.postArray = GetTextureInfo();
@@ -185,13 +184,13 @@ public class WebcamHandler : MonoBehaviour
 
     IEnumerator GetTexture()
     {
-        //UnityWebRequest www = UnityWebRequestTexture.GetTexture("https://652c-2001-2d8-e290-c6c6-58f2-92e-65e7-5cc2.jp.ngrok.io/static/image/result.jpg");
-
+        
         yield return new WaitForSeconds(7.0f);
 
         rawImage.enabled = true;
 
-        Uri address = new Uri("https://d025-2001-2d8-e290-c6c6-58f2-92e-65e7-5cc2.jp.ngrok.io/static/image/result.jpg");
+        Uri address = new Uri("https://a1f2-110-70-51-37.jp.ngrok.io/static/image/result.jpg");
+        //Uri address = new Uri(URL.instance.receiveImage);
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(address);
         yield return www.SendWebRequest();
 

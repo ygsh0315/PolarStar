@@ -1,24 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
-
-public class KJH_SceneManager : MonoBehaviour
+public class URL : MonoBehaviour
 {
-    //public Image whiteImage;
-    public static KJH_SceneManager instance;
+    public string voiceRecURL = "";
+    public string sendImage = "";
+    public string receiveImage = "";
 
-    //float currentTime = 0f;
+    public static URL instance;
 
     private void Awake()
     {
         if (!instance)
-        {
             instance = this;
-        }
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,11 +26,5 @@ public class KJH_SceneManager : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void LoadWebCamScene()
-    {
-        // 이미지 페이드 아웃
-        SceneManager.LoadScene(1);
     }
 }

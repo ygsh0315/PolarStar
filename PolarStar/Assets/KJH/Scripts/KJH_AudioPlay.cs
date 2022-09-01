@@ -22,7 +22,7 @@ public class KJH_AudioPlay : MonoBehaviour
             {
                 print("양자리 시나리오 플레이");
                 source.Play();
-                isStartSound = true;                
+                isStartSound = true;
             }
         }
     }

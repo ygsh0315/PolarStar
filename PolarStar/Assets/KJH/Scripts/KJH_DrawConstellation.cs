@@ -148,20 +148,21 @@ public class KJH_DrawConstellation : MonoBehaviour
         {
             HTTPRequester hTTPRequester = new HTTPRequester();
 
-            hTTPRequester.url = "https://9dd2-175-223-33-151.jp.ngrok.io/get_location";
+            hTTPRequester.url = "https://a1f2-110-70-51-37.jp.ngrok.io/getcord";
+            //hTTPRequester.url = URL.vo;
             hTTPRequester.requestType = RequestType.GET;
             hTTPRequester.onComplete = CallBack;
 
             HTTPManager.instance.SendRequest(hTTPRequester);
         }
 
-        // 통신 테스트
-        if (isSuccess)
-        {
-            StarRay.instance.transfort(starList[0]);
-            KJH_StarColorChange.instance.HttpStarColorChange(starList[0]);
-            isSuccess = false;
-        }
+        //// 통신 테스트
+        //if (isSuccess)
+        //{
+        //    StarRay.instance.transfort(starList[0]);
+        //    KJH_StarColorChange.instance.HttpStarColorChange(starList[0]);
+        //    isSuccess = false;
+        //}
     }
 
     void CallBack(DownloadHandler downloadHandler)
@@ -171,11 +172,8 @@ public class KJH_DrawConstellation : MonoBehaviour
         print(co.index);
         isSuccess = true;
 
-        //DrawStarHttp(raList[co.index], decList[co.index], co.name);
-        //HttpStarColorChange(starList[co.index]);
-
-        //KJH_StarColorChange.instance.HttpStarColorChange(starList[co.index]);
-        //StarRay.instance.transfort(starList[co.index]);
+        KJH_StarColorChange.instance.HttpStarColorChange(starList[co.index]);
+        StarRay.instance.transfort(starList[co.index]);
 
     }
 

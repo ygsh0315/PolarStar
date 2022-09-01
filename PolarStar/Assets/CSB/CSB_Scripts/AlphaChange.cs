@@ -33,25 +33,29 @@ public class AlphaChange : MonoBehaviour
 
             curTime += Time.deltaTime;
 
-            if(curTime > ap.source.clip.length)
+            if (curTime > ap.source.clip.length)
+            //if(curTime > 5f)
             {
+                ap.source.Stop();
                 isColorChange = true;
             }
         }
 
         if (isColorChange)
         {
-            color = Color.Lerp(color, targetColor, Time.deltaTime * 0.1f);
+            color = Color.Lerp(color, targetColor, Time.deltaTime * 0.4f);
             
-            if(color.a > 0.27f)
+            if(color.a > 0.25f)
             {
                 color = targetColor;
                 isColorChange = false;
+
+                //KJH_SceneManager.instance.LoadWebCamScene();
             }
 
             GetComponent<SpriteRenderer>().color = color;
 
-            KJH_SceneManager.instance.LoadWebCamScene();
+            
             
         }
     }
