@@ -8,6 +8,9 @@ public class HTTPManager : MonoBehaviour
 {
     public static HTTPManager instance;
 
+
+
+
     private void Awake()
     {
         // 만약에 instacne가 null이라면
@@ -43,16 +46,16 @@ public class HTTPManager : MonoBehaviour
             case RequestType.POST:
                 webRequest = UnityWebRequest.Post(requester.url, requester.postData);
                 byte[] data = Encoding.UTF8.GetBytes(requester.postData);
-                webRequest.uploadHandler = new UploadHandlerRaw(data);
-                webRequest.SetRequestHeader("Content-Type", "application/json");
+                webRequest.uploadHandler = new UploadHandlerRaw(requester.postArray);
+               // webRequest.SetRequestHeader("Content-Type", "application/json");
 
                 break;
             case RequestType.GET:
                 webRequest = UnityWebRequest.Get(requester.url);
                 break;
             case RequestType.PUT:
-                webRequest = UnityWebRequest.Put(requester.url, requester.postData);
-                webRequest.SetRequestHeader("Content-Type", "application/json");
+                webRequest = UnityWebRequest.Put(requester.url, requester.postArray);
+                //webRequest.SetRequestHeader("Content-Type", "application/json");
                 break;
             case RequestType.DELETE:
                 webRequest = UnityWebRequest.Delete(requester.url);
@@ -66,6 +69,9 @@ public class HTTPManager : MonoBehaviour
         {
             // 완료되었다고 requester, onComplete를 실행
             print(webRequest.downloadHandler.text);
+
+            //byte[] texData = texture2D.GetRawTextureData();
+            //string texString = Encoding.UTF8.GetString(texData);
 
             requester.onComplete(webRequest.downloadHandler);
         }

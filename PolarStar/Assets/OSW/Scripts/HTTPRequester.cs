@@ -16,7 +16,8 @@ public enum RequestType
     POST,
     GET,
     PUT,
-    DELETE
+    DELETE,
+    IMAGE
 }
 
 public class HTTPRequester 
@@ -28,6 +29,8 @@ public class HTTPRequester
 
     // Post Data
     public string postData; // (body)
+    public byte[] postArray;
+    
 
     // 응답이 왔을 때 호출해줄 함수(Action)
     // Action : 함수를 넣을 수 있는 자료형
