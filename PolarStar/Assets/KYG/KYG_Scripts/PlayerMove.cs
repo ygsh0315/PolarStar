@@ -54,11 +54,11 @@ public class PlayerMove : MonoBehaviour
             gravity = gravityPower * gravityDir;
             yVelocity += gravity * Time.deltaTime;
         }
-        if (Input.GetButtonDown("Jump") && jumpCount < maxJumpCount)
-        {
-            yVelocity = jumpPower * transform.up;
-            jumpCount++;
-        }
+        //if (Input.GetButtonDown("Jump") && jumpCount < maxJumpCount)
+        //{
+        //    yVelocity = jumpPower * transform.up;
+        //    jumpCount++;
+        //}
 
         // 이동할 방향구하기
         //Vector3 dir = new Vector3(h, 0, v);
