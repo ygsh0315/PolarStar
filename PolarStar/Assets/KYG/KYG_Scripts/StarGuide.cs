@@ -24,6 +24,8 @@ public class StarGuide : MonoBehaviour
     public Image GuideBar;
     public Text guideText;
     public GuideState guideState;
+
+    // ½Ì±ÛÅæÀ¸·Î »ç¿ë
     public static StarGuide Instance;
     private void Awake()
     {
@@ -72,13 +74,13 @@ public class StarGuide : MonoBehaviour
     float guideStartTime = 5f;
     private void guideStart()
     {
-        StartCoroutine("FadeOut");
+        //StartCoroutine("FadeOut");
         guideText.text = startText;
         currentTime += Time.deltaTime;
         if (currentTime > guideStartTime)
         {
-            StopAllCoroutines();
-            StartCoroutine("FadeIn");
+            //StopAllCoroutines();
+            //StartCoroutine("FadeIn");
             guideState = GuideState.state1;
             currentTime = 0;
         }
@@ -86,11 +88,15 @@ public class StarGuide : MonoBehaviour
 
     private void state1()
     {
-        
-        StartCoroutine("FadeOut");
+        //currentTime += Time.deltaTime;
+
+        //if(currentTime > 2f)
+        //{
+            //guideState = GuideState.state2;
+        //}
+        // StartCoroutine("FadeOut");
         guideText.text = S_1Text;
-        StartCoroutine("FadeIn");
-        guideState = GuideState.state2;
+        //StartCoroutine("FadeIn");
     }
 
     private void state2()
@@ -102,13 +108,13 @@ public class StarGuide : MonoBehaviour
     private void state3()
     {
         guideText.text = S_3Text;
-        guideState = GuideState.state4;
+        //guideState = GuideState.state4;
     }
 
     private void state4()
     {
         guideText.text = S_4Text;
-        guideState = GuideState.state5;
+        //guideState = GuideState.state5;
     }
 
     private void state5()

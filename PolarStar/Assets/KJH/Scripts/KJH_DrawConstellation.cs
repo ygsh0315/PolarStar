@@ -146,6 +146,8 @@ public class KJH_DrawConstellation : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            StarGuide.Instance.guideState = StarGuide.GuideState.state2;
+
             HTTPRequester hTTPRequester = new HTTPRequester();
 
             hTTPRequester.url = "https://a1f2-110-70-51-37.jp.ngrok.io/getcord";
@@ -173,6 +175,7 @@ public class KJH_DrawConstellation : MonoBehaviour
         isSuccess = true;
 
         KJH_StarColorChange.instance.HttpStarColorChange(starList[co.cord]);
+        StarGuide.Instance.guideState = StarGuide.GuideState.state3;
         StarRay.instance.transfort(starList[co.cord]);
 
     }
