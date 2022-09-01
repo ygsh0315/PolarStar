@@ -39,7 +39,7 @@ public class CamRotate : MonoBehaviour
         //-60~ 60 으로 각도 제한걸기
         //x축 -> pitch, y축 -> Yaw, z축 -> Roll
         my = Mathf.Clamp(my, -60, 60);
-        transform.eulerAngles = new Vector3(-my, mx, 0);
+        transform.localEulerAngles = new Vector3(-my, mx, 0);
         //2. 방향이 필요하다.
         //Vector3 dir = new Vector3(-my, mx, 0);
 
