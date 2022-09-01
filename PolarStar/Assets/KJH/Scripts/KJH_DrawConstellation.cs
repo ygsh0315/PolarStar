@@ -169,11 +169,11 @@ public class KJH_DrawConstellation : MonoBehaviour
     {
         Constellation co = JsonUtility.FromJson<Constellation>(downloadHandler.text);
         print(co.name);
-        print(co.index);
+        print(co.cord);
         isSuccess = true;
 
-        KJH_StarColorChange.instance.HttpStarColorChange(starList[co.index]);
-        StarRay.instance.transfort(starList[co.index]);
+        KJH_StarColorChange.instance.HttpStarColorChange(starList[co.cord]);
+        StarRay.instance.transfort(starList[co.cord]);
 
     }
 
