@@ -10,6 +10,8 @@ public class AlphaChange : MonoBehaviour
     bool isColorChange = false;
     Quaternion originRotation;
 
+    KJH_AudioPlay ap;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,19 +19,24 @@ public class AlphaChange : MonoBehaviour
 
         transform.forward = Vector3.zero - transform.position;
 
-
-
         // alpha º¯°æ
         transform.GetComponent<SpriteRenderer>().color = color;
-
+        ap = GetComponent<KJH_AudioPlay>();
     }
-
+    float curTime = 0f;
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (ap.isStartSound)
         {
-            isColorChange = true;
+            //isColorChange = true;
+
+            curTime += Time.deltaTime;
+
+            if(curTime > ap.source.clip.length)
+            {
+                isColorChange = true;
+            }
         }
 
         if (isColorChange)
@@ -43,6 +50,9 @@ public class AlphaChange : MonoBehaviour
             }
 
             GetComponent<SpriteRenderer>().color = color;
+
+            KJH_SceneManager.instance.LoadWebCamScene();
+            
         }
     }
 }

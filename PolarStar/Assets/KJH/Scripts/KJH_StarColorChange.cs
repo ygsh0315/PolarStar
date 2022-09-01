@@ -8,7 +8,6 @@ using UnityEngine;
 public class KJH_StarColorChange : MonoBehaviour
 {
     int index;
-    ParticleSystem ps;
     Color targetColor = new Vector4(1, 0.5f, 0, 1);
     Color getColor = new Vector4(0, 1, 0, 1);
     public bool isGetBadge = false;
@@ -24,22 +23,24 @@ public class KJH_StarColorChange : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ps = GetComponent<ParticleSystem>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isGetBadge)
-        {
-            ChangeColor(getColor);
-            isGetBadge = false;
-        }
+        //if (isGetBadge)
+        //{
+        //    var main = ps.main;
+        //    main.startColor = color;
+
+        //    isGetBadge = false;
+        //}
 
         // 통신이 성공되면 해당 인덱스의 별자리의 색상을 바꾼다.
     }
 
-    void ChangeColor(Color color)
+    void ChangeColor(Color color, ParticleSystem ps)
     {
         var main = ps.main;
         main.startColor = color;
@@ -52,7 +53,7 @@ public class KJH_StarColorChange : MonoBehaviour
         {
             ParticleSystem ps = stars.transform.GetChild(i).GetChild(0).GetComponent<ParticleSystem>();
 
-            ChangeColor(targetColor);
+            ChangeColor(targetColor, ps);
         }
     }
 
