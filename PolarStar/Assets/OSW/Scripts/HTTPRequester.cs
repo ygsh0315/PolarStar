@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 public class Constellation
 {
     public string name;
-    public int index;
+    public int cord;
 }
 
 public enum RequestType

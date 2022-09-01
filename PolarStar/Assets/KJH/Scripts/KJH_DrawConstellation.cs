@@ -22,6 +22,7 @@ public class KJH_DrawConstellation : MonoBehaviour
     public bool isSuccess = false;
 
     // 별자리 이름
+    //List<st>
     string[] names = { "양자리", "황소자리", "북두칠성", "카시오페아", "북극성" };
 
     // 별 좌표 저장할 리스트
@@ -164,17 +165,18 @@ public class KJH_DrawConstellation : MonoBehaviour
         //    isSuccess = false;
         //}
     }
-
+    
     void CallBack(DownloadHandler downloadHandler)
     {
         Constellation co = JsonUtility.FromJson<Constellation>(downloadHandler.text);
         print(co.name);
-        print(co.index);
+        print(co.cord);
         isSuccess = true;
 
-        KJH_StarColorChange.instance.HttpStarColorChange(starList[co.index]);
-        StarRay.instance.transfort(starList[co.index]);
-
+        KJH_StarColorChange.instance.HttpStarColorChange(starList[co.cord]);
+        StarRay.instance.transfort(starList[co.cord]);
+        KJH_AudioPlay.instance.PlaySound(co.cord);
+        AlphaChange.instance.getIndex(co.cord);
     }
 
     // 모든 별자리 그리기
