@@ -63,8 +63,9 @@ public class PlayerMove : MonoBehaviour
         // 이동할 방향구하기
         //Vector3 dir = new Vector3(h, 0, v);
         //dir.Normalize();
-        Vector3 dir = transform.forward * v + transform.right * h;// transform.TransformDirection(dir);
-        dir = Camera.main.transform.TransformDirection(dir);
+        //Vector3 dir = transform.forward * v + transform.right * h;// transform.TransformDirection(dir);
+        //dir = Camera.main.transform.TransformDirection(dir);
+        Vector3 dir = Camera.main.transform.forward * v + Camera.main.transform.right * h;
         dir.Normalize();
         transform.up = -gravityDir;
 
@@ -72,7 +73,8 @@ public class PlayerMove : MonoBehaviour
         dir += yVelocity;
         // up 방향 맞춰주기
         rb.velocity = dir * speed;
-
+       
+        
         // 중력적용
         //rb.velocity = dir;
 
