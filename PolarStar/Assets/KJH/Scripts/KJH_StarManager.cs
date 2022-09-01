@@ -13,6 +13,10 @@ public class KJH_StarManager : MonoBehaviour
     public float angle = 45f;
     public float a = 50f;
 
+
+    public float radio = 300f;
+    public float starAmount = 100f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,15 +32,22 @@ public class KJH_StarManager : MonoBehaviour
         {
             // 별똥별 생성
             GameObject star = Instantiate(starFactory);
-            transform.forward = player.forward;
-            star.transform.forward = transform.forward;
-            
-            
-            float angle = Random.Range(-10, 10);
-            float y = Random.Range(5f, 20f);
-            float posX = a * Mathf.Tan(angle);
+            //transform.forward = player.forward;
+            //star.transform.forward = transform.forward;
 
-            star.transform.position = transform.right * posX + transform.up * y + transform.forward * a;
+
+            //float angle = Random.Range(-10, 10);
+            //float y = Random.Range(5f, 20f);
+            //float posX = a * Mathf.Tan(angle);
+
+            //star.transform.position = transform.right * posX + transform.up * y + transform.forward * a;
+
+
+
+            //GameObject star2= Instantiate(starFactory2);
+
+            star.transform.position = Random.onUnitSphere * radio;
+
 
             // 일정 각도 안에서만 별똥별이 생성되고 싶다.     
             // 각도를 알 때 위치를 알고 싶다.
