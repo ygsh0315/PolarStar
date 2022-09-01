@@ -15,7 +15,7 @@ public class StarRay : MonoBehaviour
 
     private void Awake()
     {
-        if (!instance)
+        if (instance == null)
         {
             instance = this;
         }
@@ -50,7 +50,7 @@ public class StarRay : MonoBehaviour
     }
     public void transfort(GameObject stars)
     {
-        Transform trans = stars.transform.GetChild(1).transform;
+        Transform trans = stars.transform.GetChild(0).transform;
         print(trans);
         if (!trans) return;
 
@@ -63,7 +63,7 @@ public class StarRay : MonoBehaviour
             //if (Input.GetKeyDown(KeyCode.T))
             //{
                 Debug.DrawRay(starRay.origin, (Earth.transform.position - trans.position).normalized * 1000, Color.red);
-                print(starRayHitInfo.point);
+                //print(starRayHitInfo.point);
                 Player.transform.position = starRayHitInfo.point;
 
                 //Player.transform.up

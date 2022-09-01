@@ -153,7 +153,14 @@ public class KJH_DrawConstellation : MonoBehaviour
             hTTPRequester.onComplete = CallBack;
 
             HTTPManager.instance.SendRequest(hTTPRequester);
+        }
 
+        // 통신 테스트
+        if (isSuccess)
+        {
+            StarRay.instance.transfort(starList[0]);
+            KJH_StarColorChange.instance.HttpStarColorChange(starList[0]);
+            isSuccess = false;
         }
     }
 
@@ -167,8 +174,9 @@ public class KJH_DrawConstellation : MonoBehaviour
         //DrawStarHttp(raList[co.index], decList[co.index], co.name);
         //HttpStarColorChange(starList[co.index]);
 
+        //KJH_StarColorChange.instance.HttpStarColorChange(starList[co.index]);
+        //StarRay.instance.transfort(starList[co.index]);
 
-        KJH_StarColorChange.instance.HttpStarColorChange(starList[co.index]);
     }
 
     // 모든 별자리 그리기
