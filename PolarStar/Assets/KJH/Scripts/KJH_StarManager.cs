@@ -37,24 +37,25 @@ public class KJH_StarManager : MonoBehaviour
             currentTime = 0f;
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            HTTPRequester hTTPRequester = new HTTPRequester();
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    HTTPRequester hTTPRequester = new HTTPRequester();
 
-            hTTPRequester.url = "https://92c9-175-223-17-145.jp.ngrok.io/get_location";
-            hTTPRequester.requestType = RequestType.GET;
-            hTTPRequester.onComplete = CallBack;
+        //    hTTPRequester.url = "https://92c9-175-223-17-145.jp.ngrok.io/get_location";
+        //    hTTPRequester.requestType = RequestType.GET;
+        //    hTTPRequester.onComplete = CallBack;
 
 
-            HTTPManager.instance.SendRequest(hTTPRequester);
-        }
+        //    HTTPManager.instance.SendRequest(hTTPRequester);
+        //}
     }
 
-    void CallBack(DownloadHandler downloadHandler)
-    {
-        Constellation co = JsonUtility.FromJson<Constellation>(downloadHandler.text);
-        print(co.name);
-        print(co.index);
+    //void CallBack(DownloadHandler downloadHandler)
+    //{
+    //    Constellation co = JsonUtility.FromJson<Constellation>(downloadHandler.text);
+    //    print(co.name);
+    //    print(co.index);
 
-    }
+
+    //}
 }
