@@ -4,77 +4,85 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public GameObject Planet;
+    public GameObject Earth;
+    //필요속성 : 이동속도
+    public float speed = 5;
 
-    public float speed = 5f;
-    public float jumpPower = 1.2f;
+    //필요속성 Character Controller
+    Rigidbody rb;
 
-    float gravity = 100;
-    bool OnGround = false;
+    //필요속성 : 중력
+    public float gravityPower = 10;
 
-    float distanceToGround;
-    Vector3 Groundnormal;
+    public Vector3 gravity = Vector3.zero;
 
-    private Rigidbody rb;
+    //필요속성 : 수직속도
+    public Vector3 gravityDir;
 
+    public Vector3 yVelocity = Vector3.zero;
 
+    //필요속성 : 점프파워
+    public float jumpPower = 5;
+
+    int jumpCount = 0;
+    public int maxJumpCount = 2;
+    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
-    }
 
+    }
+    public float h;
+    public float v;
+    // Update is called once per frame
     void Update()
     {
-        // Movement
-        float h = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
-        float v = Input.GetAxis("Vertical") * Time.deltaTime * speed;
-
-        transform.Translate(h, 0, v);
-
-        // Local Lotation
-        if (Input.GetKey(KeyCode.E))
+        h = Input.GetAxis("Horizontal");
+        v = Input.GetAxis("Vertical");
+        gravityDir = (Earth.transform.position - transform.position).normalized;
+        Ray ray = new Ray(transform.position, -transform.up);
+        RaycastHit hitInfo;
+        int layer = 1 << gameObject.layer;
+        if (Physics.Raycast(ray, out hitInfo, 1.5f, ~layer))
         {
-            transform.Rotate(0, 150 * Time.deltaTime, 0);
+            yVelocity = Vector3.zero;
+            jumpCount = 0;
         }
-        if (Input.GetKey(KeyCode.Q))
+        else
         {
-            transform.Rotate(0, -150 * Time.deltaTime, 0);
+            //yVelocity +=  gravity * Time.deltaTime;
+            gravity = gravityPower * gravityDir;
+            yVelocity += gravity * Time.deltaTime;
         }
-
-        // Jump
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump") && jumpCount < maxJumpCount)
         {
-            rb.AddForce(transform.up * 40000 * jumpPower * Time.deltaTime);
-        }
-
-        // Ground Control
-        RaycastHit hit = new RaycastHit();
-        if(Physics.Raycast(transform.position, -transform.up, out hit, 10))
-        {
-            distanceToGround = hit.distance;
-            Groundnormal = hit.normal;
-
-            if(distanceToGround <= 0.2f)
-            {
-                OnGround = true;
-            }
-            else
-            {
-                OnGround = false;
-            }
+            yVelocity = jumpPower * transform.up;
+            jumpCount++;
         }
 
-        // Vector3 and Rotation
-        Vector3 gravityDirection = (transform.position - Planet.transform.position).normalized;
+        // 이동할 방향구하기
+        //Vector3 dir = new Vector3(h, 0, v);
+        //dir.Normalize();
+        Vector3 dir = transform.forward * v + transform.right * h;// transform.TransformDirection(dir);
+        dir = Camera.main.transform.TransformDirection(dir);
+        dir.Normalize();
+        transform.up = -gravityDir;
 
-        if (OnGround == false)
-        {
-            rb.AddForce(gravityDirection * -gravity);
-        }
+        // 그 방향으로 이동
+        dir += yVelocity;
+        // up 방향 맞춰주기
+        rb.velocity = dir * speed;
 
-        // 
-        Quaternion toRotation = Quaternion.FromToRotation(transform.up, Groundnormal) * transform.rotation;
-        transform.rotation = toRotation;
+        // 중력적용
+        //rb.velocity = dir;
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        gravityDir = (Earth.transform.position - transform.position).normalized;
+
+        Debug.DrawLine(transform.position, transform.position + gravityDir * 5, Color.red);
+
     }
 }
