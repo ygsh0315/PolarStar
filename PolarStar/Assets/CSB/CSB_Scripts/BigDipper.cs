@@ -11,7 +11,8 @@ using UnityEngine;
 
 public class BigDipper : MonoBehaviour
 {
-    public GameObject[] stars = new GameObject[7];   // 구성 별
+    List<GameObject> starList = new List<GameObject>();
+    // GameObject[] stars = new GameObject[];   // 구성 별
     float[] ra = new float[] { 13.4732f, 13.2355f, 12.5401f, 12.1525f, 11.5349f, 11.0150f, 11.0343f };  // 구성 별들의 적경
     float[] dec = new float[] { 49.1848f, 54.5531f, 55.5735f, 57.0157f, 53.4141f, 56.2256f, 61.4503f };
         // 구성 별들의 적위
@@ -28,6 +29,10 @@ public class BigDipper : MonoBehaviour
 
     void Start()
     {
+        for(int i = 0; i< transform.childCount; i++)
+        {
+            starList.Add(transform.GetChild(i).gameObject);
+        }
         DrawStar();
 
     }
@@ -55,7 +60,7 @@ public class BigDipper : MonoBehaviour
     // 구면좌표를 직교좌표로
     void DrawStar()
     {
-        for(int i = 0; i < stars.Length; i++)
+        for(int i = 0; i < starList.Count; i++)
         {
             // 적경 : -> 디그리 -> 라디안으로
             ra[i] = ra[i] * -15f * Mathf.PI / 180;
@@ -69,7 +74,7 @@ public class BigDipper : MonoBehaviour
             x = rr * Mathf.Sin(ra[i]);
             y = r * Mathf.Cos(dec[i]);
 
-            stars[i].transform.position = new Vector3(x, y, z);
+            starList[i].transform.position = new Vector3(x, y, z);
 
 
         }
