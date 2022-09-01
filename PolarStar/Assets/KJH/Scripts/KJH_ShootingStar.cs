@@ -9,13 +9,13 @@ using UnityEngine;
 
 public class KJH_ShootingStar : MonoBehaviour
 {
-    
     public float fallSpeed = 5f;
     Vector3 fallDir;
 
     public float removeTime = 3f;
     float currentTime = 0f;
     float randX, randY;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +25,7 @@ public class KJH_ShootingStar : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {        
         // 일정시간이 지나면 없어지고 싶다.
         currentTime += Time.deltaTime;
 
@@ -40,13 +40,7 @@ public class KJH_ShootingStar : MonoBehaviour
 
         // 방향을 랜덤으로 지정한다.
         transform.position += fallDir.normalized * fallSpeed * Time.deltaTime;
+
+
     }
-
-    //// 두 벡터사이의 각도 반환
-    //public static float GetAngle(Vector3 vStart, Vector3 vEnd)
-    //{
-    //    Vector3 v = vEnd - vStart;
-
-    //    return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
-    //}
 }

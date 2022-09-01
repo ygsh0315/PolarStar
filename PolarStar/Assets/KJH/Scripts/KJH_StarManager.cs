@@ -27,15 +27,13 @@ public class KJH_StarManager : MonoBehaviour
         if(currentTime > createTime)
         {
             // º°¶Ëº° »ý¼º
-
             GameObject star = Instantiate(starFactory);
             transform.forward = player.forward;
             star.transform.forward = transform.forward;
             
+            
             float angle = Random.Range(-10, 10);
             float y = Random.Range(5f, 20f);
-
-            
             float posX = a * Mathf.Tan(angle);
 
             star.transform.position = transform.right * posX + transform.up * y + transform.forward * a;
