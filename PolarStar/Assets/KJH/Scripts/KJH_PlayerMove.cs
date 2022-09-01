@@ -23,6 +23,7 @@ public class KJH_PlayerMove : MonoBehaviour
 
         dir = Camera.main.transform.TransformDirection(dir);
         dir.y = 0f;
+
         if (!(h == 0 && v == 0))
         {
             transform.position += dir * speed * Time.deltaTime;
