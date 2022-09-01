@@ -11,11 +11,15 @@ public struct Pos1
 }
 public class KJH_DrawConstellation : MonoBehaviour
 {
+    public static KJH_DrawConstellation instance;
+
     public GameObject starFactory;
     public GameObject httpStarFactory;
     public List<GameObject> starList = new List<GameObject>();
     public float r; // 천구의 반지름
     public GameObject temp;
+
+    public bool isSuccess = false;
 
     // 별자리 이름
     string[] names = { "양자리", "황소자리", "북두칠성", "카시오페아", "북극성" };
@@ -86,6 +90,11 @@ public class KJH_DrawConstellation : MonoBehaviour
     List<float> ra14 = new List<float> { 2.3151f };
     List<float> dec14 = new List<float> { 89.2114f };
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -139,7 +148,7 @@ public class KJH_DrawConstellation : MonoBehaviour
         {
             HTTPRequester hTTPRequester = new HTTPRequester();
 
-            hTTPRequester.url = "https://92c9-175-223-17-145.jp.ngrok.io/get_location";
+            hTTPRequester.url = "https://9dd2-175-223-33-151.jp.ngrok.io/get_location";
             hTTPRequester.requestType = RequestType.GET;
             hTTPRequester.onComplete = CallBack;
 
@@ -153,15 +162,22 @@ public class KJH_DrawConstellation : MonoBehaviour
         Constellation co = JsonUtility.FromJson<Constellation>(downloadHandler.text);
         print(co.name);
         print(co.index);
+        isSuccess = true;
 
-        DrawStarHttp(raList[co.index], decList[co.index], co.name);
+        //DrawStarHttp(raList[co.index], decList[co.index], co.name);
+        //HttpStarColorChange(starList[co.index]);
 
+
+        KJH_StarColorChange.instance.HttpStarColorChange(starList[co.index]);
     }
 
-    // 별자리 그리기
+    // 모든 별자리 그리기
     public void DrawStarAll(List<float> ra, List<float> dec)
     {
         GameObject go = Instantiate(temp);
+        go.transform.position = Vector3.zero;
+
+        starList.Add(go);
 
         for (int i = 0; i < ra.Count; i++)
         {
@@ -180,35 +196,50 @@ public class KJH_DrawConstellation : MonoBehaviour
             float y = r * Mathf.Cos(dec[i]);
 
             // starList[i].transform.position = Vector3.zero + new Vector3(x, y, z);
-            star.transform.position = new Vector3(x, y, z);
-        }
-    }
-
-    // 별자리 그리기
-    public void DrawStarHttp(List<float> ra, List<float> dec, string name)
-    {
-        GameObject go = Instantiate(temp);
-        go.transform.position = Vector3.zero;
-        go.name = name;
-
-        for (int i = 0; i < ra.Count; i++)
-        {
-            GameObject star = Instantiate(httpStarFactory);
-            star.transform.parent = go.transform;
-            // 적경 : -> 디그리 -> 라디안으로
-            ra[i] = ra[i] * -15f * Mathf.PI / 180;
-
-            // 적위 : 디그리 -> 라디안
-            dec[i] = dec[i] * (Mathf.PI / 180);
-            dec[i] = (Mathf.PI / 2) - dec[i];
-
-            var rr = r * Mathf.Sin(dec[i]);
-            float z = rr * Mathf.Cos(ra[i]);
-            float x = rr * Mathf.Sin(ra[i]);
-            float y = r * Mathf.Cos(dec[i]);
-
-            star.transform.position = Vector3.zero + new Vector3(x, y, z);
             //star.transform.position = new Vector3(x, y, z);
+            star.transform.position = Vector3.zero + new Vector3(x, y, z);
         }
     }
+
+    //// 통신 받은 별자리의 색상 변경하기
+    //public void HttpStarColorChange(GameObject stars, int index)
+    //{
+    //    for(int i=0; i<stars.transform.childCount; i++)
+    //    {
+
+    //    }
+    //}
+
+
+
+
+    //public void DrawStarHttp(List<float> ra, List<float> dec, string name)
+    //{
+    //    GameObject go = Instantiate(temp);
+    //    go.transform.position = Vector3.zero;
+    //    go.name = name;
+
+
+
+
+    //    for (int i = 0; i < ra.Count; i++)
+    //    {
+    //        GameObject star = Instantiate(httpStarFactory);
+    //        star.transform.parent = go.transform;
+    //        // 적경 : -> 디그리 -> 라디안으로
+    //        ra[i] = ra[i] * -15f * Mathf.PI / 180;
+
+    //        // 적위 : 디그리 -> 라디안
+    //        dec[i] = dec[i] * (Mathf.PI / 180);
+    //        dec[i] = (Mathf.PI / 2) - dec[i];
+
+    //        var rr = r * Mathf.Sin(dec[i]);
+    //        float z = rr * Mathf.Cos(ra[i]);
+    //        float x = rr * Mathf.Sin(ra[i]);
+    //        float y = r * Mathf.Cos(dec[i]);
+
+    //        star.transform.position = Vector3.zero + new Vector3(x, y, z);
+    //        //star.transform.position = new Vector3(x, y, z);
+    //    }
+    //}
 }
