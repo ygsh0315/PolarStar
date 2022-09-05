@@ -177,7 +177,7 @@ public class KJH_DrawConstellation : MonoBehaviour
 
         KJH_StarColorChange.instance.HttpStarColorChange(starList[co.cord]);
 
-        
+        StarGuide.Instance.guideState = StarGuide.GuideState.state3;
         StarRay.instance.transfort(starList[co.cord]);
         KJH_AudioPlay.instance.PlaySound(co.cord);
         AlphaChange.instance.getIndex(co.cord);
