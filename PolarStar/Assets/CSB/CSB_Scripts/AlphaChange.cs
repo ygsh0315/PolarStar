@@ -6,9 +6,9 @@ using UnityEngine;
 public class AlphaChange : MonoBehaviour
 {
     public static AlphaChange instance;
-    //Color color = new Color(1, 1, 1, 0);
-    Color targetColor = new Color(1, 1, 1, 0.4f);
-    bool isColorChange = false;
+    Color color = new Color(1, 1, 1, 0);
+    Color targetColor = new Color(1, 1, 1, 0.3f);
+    public bool isColorChange = false;
     Quaternion originRotation;
 
     KJH_AudioPlay ap;
@@ -20,6 +20,7 @@ public class AlphaChange : MonoBehaviour
             instance = this;
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,7 @@ public class AlphaChange : MonoBehaviour
         transform.forward = Vector3.zero - transform.position;
 
         // alpha º¯°æ
-        //transform.GetComponent<SpriteRenderer>().color = color;
+        transform.GetComponent<SpriteRenderer>().color = color;
         ap = GetComponent<KJH_AudioPlay>();
     }
     float curTime = 0f;
@@ -45,19 +46,15 @@ public class AlphaChange : MonoBehaviour
             //if(curTime > 5f)
             {
                 ap.source.Stop();
-                ap.isStartSound = false;
                 isColorChange = true;
             }
         }
 
         if (isColorChange)
         {
-            SpriteRenderer sr = transform.GetChild(imageIndex).GetComponent<SpriteRenderer>();
-            sr.enabled = true;
-            Color color = sr.color;
             color = Color.Lerp(color, targetColor, Time.deltaTime * 0.4f);
-
-            if (color.a > 0.25f)
+            
+            if(color.a > 0.25f)
             {
                 color = targetColor;
                 isColorChange = false;
@@ -65,24 +62,10 @@ public class AlphaChange : MonoBehaviour
                 //KJH_SceneManager.instance.LoadWebCamScene();
             }
 
-            sr.color = color;
+            GetComponent<SpriteRenderer>().color = color;
+
+            
+            
         }
-}
-    int imageIndex = 0;
-    public void getIndex(int index)
-    {
-        imageIndex = index;
-        //SpriteRenderer sr = transform.GetChild(index).GetComponent<SpriteRenderer>();
-        //sr.enabled = true;
-        //Color color = sr.color;
-        //color = Color.Lerp(color, targetColor, Time.deltaTime * 0.4f);
-
-        //if (color.a > 0.25f)
-        //{
-        //    color = targetColor;
-        //    isColorChange = false;
-        //}
-
-        //sr.color = color;
     }
 }

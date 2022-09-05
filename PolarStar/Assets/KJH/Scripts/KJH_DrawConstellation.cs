@@ -6,8 +6,8 @@ using UnityEngine.Networking;
 public struct Pos1
 
 {
-    public float ra;   // ï¿½ï¿½ï¿½ï¿½
-    public float dec;  // ï¿½ï¿½ï¿½ï¿½
+    public float ra;   // Àû°æ
+    public float dec;  // À§µµ
 }
 public class KJH_DrawConstellation : MonoBehaviour
 {
@@ -16,78 +16,78 @@ public class KJH_DrawConstellation : MonoBehaviour
     public GameObject starFactory;
     public GameObject httpStarFactory;
     public List<GameObject> starList = new List<GameObject>();
-    public float r; // Ãµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float r; // Ãµ±¸ÀÇ ¹ÝÁö¸§
     public GameObject temp;
 
+    
     public bool isSuccess = false;
 
-    // ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ì¸ï¿½
-    //List<st>
-    string[] names = { "ï¿½ï¿½ï¿½Ú¸ï¿½", "È²ï¿½ï¿½ï¿½Ú¸ï¿½", "ï¿½Ïµï¿½Ä¥ï¿½ï¿½", "Ä«ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½Ï±Ø¼ï¿½" };
+    // º°ÀÚ¸® ÀÌ¸§
+    string[] names = { "¾çÀÚ¸®", "È²¼ÒÀÚ¸®", "ºÏµÎÄ¥¼º", "Ä«½Ã¿ÀÆä¾Æ", "ºÏ±Ø¼º" };
 
-    // ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
-    List<List<float>> raList = new List<List<float>>(); // ï¿½ï¿½ï¿½ï¿½
-    List<List<float>> decList = new List<List<float>>();// ï¿½ï¿½
+    // º° ÁÂÇ¥ ÀúÀåÇÒ ¸®½ºÆ®
+    List<List<float>> raList = new List<List<float>>(); // Àû°æ
+    List<List<float>> decList = new List<List<float>>();// Àû
 
-    // ï¿½ï¿½ï¿½Ú¸ï¿½(0)
+    // ¾çÀÚ¸®(0)
     List<float> ra0 = new List<float> { 2.5119f, 2.0827f, 1.5553f, 1.5446f };
     List<float> dec0 = new List<float> { 27.2109f, 23.3407f, 20.5505f, 19.2416f };
 
-    // È²ï¿½ï¿½ï¿½Ú¸ï¿½(1)
+    // È²¼ÒÀÚ¸®(1)
     List<float> ra1 = new List<float> { 5.2742f, 4.4335f, 4.2955f, 5.3858f, 4.3712f, 4.2956f, 4.2647f, 4.2413f, 4.2104f, 4.0155f, 3.2601f };
     List<float> dec1 = new List<float> { 28.3731f, 22.5958f, 19.1349f, 21.0922f, 16.3317f, 15.5516f, 17.5846f, 17.3543f, 15.4056f, 12.3316f, 9.0632f };
 
-    // ï¿½Öµï¿½ï¿½ï¿½ï¿½Ú¸ï¿½(2)
+    // ½ÖµÕÀÌÀÚ¸®(2)
     List<float> ra2 = new List<float> { 7.4640f, 7.3717f, 7.4547f, 7.2126f, 7.1922f, 6.4632f, 7.0525f, 6.3859f, 7.2706f, 7.3600f, 7.1233f, 6.5415f, 6.4517f, 6.2418f, 6.3017f, 6.1613f, 6.0528f };
     List<float> dec2 = new List<float> { 27.5819f, 26.5045f, 24.2040f, 21.5629f, 16.3002f, 12.5220f, 20.3216f, 16.2250f, 27.4512f, 31.5018f, 30.1228f, 33.5559f, 25.0631f, 22.3007f, 20.1153f, 22.3000f, 23.1542f };
 
-    // ï¿½ï¿½ï¿½Ú¸ï¿½(3)
+    // °ÔÀÚ¸®(3)
     List<float> ra3 = new List<float> { 8.4801f, 8.2124f, 8.4433f, 8.4556f, 8.5941f, 8.1742f };
     List<float> dec3 = new List<float> { 28.4042f, 27.0843f, 21.2320f, 18.0423f, 11.4621f, 9.0705f };
 
-    // ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½(4)
+    // »çÀÚÀÚ¸®(4)
     List<float> ra4 = new List<float> { 9.4706f, 9.5400f, 10.1754f, 10.2111f, 10.0831f, 10.0932f, 11.1523f, 11.5011f, 11.1516f };
     List<float> dec4 = new List<float> { 23.4021f, 25.5410f, 23.1826f, 19.4347f, 16.3918f, 11.5134f, 15.1833f, 14.2656f, 20.2411f };
 
-    // Ã³ï¿½ï¿½ï¿½Ú¸ï¿½(5)
+    // Ã³³àÀÚ¸®(5)
     List<float> ra5 = new List<float> { 14.4722f, 14.0246f, 13.3549f, 12.5643f, 13.0316f, 12.4246f, 13.2621f, 14.1404f, 14.1710f, 14.4414f, 12.2102f, 11.4659f };
     List<float> dec5 = new List<float> { 1.4801f, 1.2617f, -0.4230f, 3.1640f, 10.5028f, -1.3412f, -11.1637f, -10.2236f, -6.0621f, -5.4515f, -0.4722f, 6.2421f };
 
-    // ÃµÄªï¿½Ú¸ï¿½(6)
+    // ÃµÄªÀÚ¸®(6)
     List<float> ra6 = new List<float> { 15.5506f, 15.3646f, 15.1812f, 14.5206f, 15.0522f };
     List<float> dec6 = new List<float> { -16.474f, -14.5149f, -9.2752f, -16.0803f, -25.2212f };
 
-    // ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½(7)
+    // Àü°¥ÀÚ¸®(7)
     List<float> ra7 = new List<float> { 16.0644f, 16.0139f, 16.3047f, 16.0012f, 16.0012f, 16.5137f, 16.5323f, 16.5610f, 16.5610f, 17.3856f, 17.4909f, 17.4402f, 17.3508f };
     List<float> dec7 = new List<float> { -19.5159f, -22.4108f, -26.2855f, -26.1044f, -26.1044f, -34.2005f, -38.0513f, -42.2404f, -42.2404f, -43.0048f, -40.0812f, -39.0233f, -37.0716f};
 
-    // ï¿½Ã¼ï¿½ï¿½Ú¸ï¿½(8)
+    // ±Ã¼öÀÚ¸®(8)
     List<float> ra8 = new List<float> { 17.4858f, 18.0715f, 18.2540f, 18.1909f, 19.0403f, 18.4704f, 18.2226f, 18.2922f, 18.1506f, 18.5640f, 19.0821f, 19.3724f, 20.0403f, 20.0112f, 19.5649f, 19.2451f, 19.2527f, 18.5904f, 19.0602f, 19.1857f, 19.2259f };
     List<float> dec8 = new List<float> { -27.5022f, -30.2526f, -34.2228f, -36.4520f, -29.5052f, -26.5803f, -29.4907f, -25.2433f, -21.0309f, -26.1607f, -27.3815f, -24.4009f, -27.3849f, -35.1256f, -41.4834f, -44.4529f, -40.3427f, -21.0435f, -21.4229f, -18.5443f, -17.4814f };
 
-    // ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½(9)
+    // ¿°¼ÒÀÚ¸®(9)
     List<float> ra9 = new List<float> { 20.1854f, 20.2203f, 20.4726f, 20.531f, 21.0713f, 21.2758f, 21.233f, 21.4121f, 21.4817f };
     List<float> dec9 = new List<float> { -12.2614f, -14.4246f, -25.1121f, -26.5003f, -17.0832f, -22.1846f, -16.4414f, -16.3333f, -16.0125f };
 
 
-    // ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½(10)
+    // ¹°º´ÀÚ¸®(10)
     List<float> ra10 = new List<float> { 20.4854f, 21.3245f, 22.0657f, 22.225f, 22.3f, 22.3631f, 22.5348f, 23.1705f, 23.241f, 23.1039f, 22.5551f, 22.5048f, 22.3151f, 22.1802f, 22.074f };
     List<float> dec10 = new List<float> { -9.2443f, -5.2814f, -0.1231f, -1.162f, 0.0549f, 0f, -7.2729f, -8.5748f, -19.5832f, -21.0254f, -15.4157f, -13.2819f, -10.334f, -7.40101f, -13.4532f };
 
-    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½(11)
+    // ¹°°í±âÀÚ¸®(11)
     List<float> ra11 = new List<float> { 1.0404f, 1.2043f, 1.1459f, 1.3242f, 1.4635f, 2.0313f, 1.5443f, 1.4236f, 1.3122f, 1.0407f, 0.4951f, 0.2146f, 0.0029f, 23.4107f, 23.2907f, 23.182f, 23.2806f, 23.4312f };
     List<float> dec11 = new List<float> { 31.5529f, 27.2255f, 24.421f, 15.2744f, 9.1619f, 2.5226f, 3.18f, 5.361f, 6.154f, 8.0045f, 7.4231f, 8.1859f, 6.5921f, 5.4459f, 6.3014f, 3.2424f, 1.2249f, 1.5419f };
 
 
-    // ï¿½Ïµï¿½Ä¥ï¿½ï¿½(12)
-    List<float> ra12 = new List<float> { 13.4732f, 13.2355f, 12.5401f, 12.1525f, 11.5349f, 11.0150f, 11.0343f };  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    // ºÏµÎÄ¥¼º(12)
+    List<float> ra12 = new List<float> { 13.4732f, 13.2355f, 12.5401f, 12.1525f, 11.5349f, 11.0150f, 11.0343f };  // ±¸¼º º°µéÀÇ Àû°æ
     List<float> dec12 = new List<float> { 49.1848f, 54.5531f, 55.5735f, 57.0157f, 53.4141f, 56.2256f, 61.4503f };
 
-    // Ä«ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½(13)
-    List<float> ra13 = new List<float> { 0.1024f, 0.4148f, 0.5806f, 1.2719f, 1.5603f };  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    // Ä«½Ã¿ÀÆä¾Æ(13)
+    List<float> ra13 = new List<float> { 0.1024f, 0.4148f, 0.5806f, 1.2719f, 1.5603f };  // ±¸¼º º°µéÀÇ Àû°æ
     List<float> dec13 = new List<float> { 59.1621f, 56.3932f, 60.5010f, 60.2058f, 63.4638f };
 
-    // ï¿½Ï±Ø¼ï¿½(14)
+    // ºÏ±Ø¼º(14)
     List<float> ra14 = new List<float> { 2.3151f };
     List<float> dec14 = new List<float> { 89.2114f };
 
@@ -100,7 +100,7 @@ public class KJH_DrawConstellation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // ï¿½ï¿½ï¿½ï¿½
+        // Àû°æ
         raList.Add(ra0);
         raList.Add(ra1);
         raList.Add(ra2);
@@ -117,7 +117,7 @@ public class KJH_DrawConstellation : MonoBehaviour
         raList.Add(ra13);
         raList.Add(ra14);
 
-        // ï¿½ï¿½ï¿½ï¿½
+        // ÀûÀ§
         decList.Add(dec0);
         decList.Add(dec1);
         decList.Add(dec2);
@@ -145,27 +145,32 @@ public class KJH_DrawConstellation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (StarGuide.Instance.guideState == StarGuide.GuideState.state1)
         {
-            StarGuide.Instance.guideState = StarGuide.GuideState.state2;
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                StarGuide.Instance.guideState = StarGuide.GuideState.state2;
 
-            HTTPRequester hTTPRequester = new HTTPRequester();
+                HTTPRequester hTTPRequester = new HTTPRequester();
 
-            hTTPRequester.url = "https://a1f2-110-70-51-37.jp.ngrok.io/getcord";
-            //hTTPRequester.url = URL.vo;
-            hTTPRequester.requestType = RequestType.GET;
-            hTTPRequester.onComplete = CallBack;
+                hTTPRequester.url = "https://a1f2-110-70-51-37.jp.ngrok.io/getcord";
+                //hTTPRequester.url = URL.vo;
+                hTTPRequester.requestType = RequestType.GET;
+                hTTPRequester.onComplete = CallBack;
 
-            HTTPManager.instance.SendRequest(hTTPRequester);
+                HTTPManager.instance.SendRequest(hTTPRequester);
+            }
+
+            // Åë½Å Å×½ºÆ®
+            if (isSuccess)
+            {
+                StarRay.instance.transfort(starList[0]);
+                KJH_StarColorChange.instance.HttpStarColorChange(starList[0]);
+                StarGuide.Instance.guideState = StarGuide.GuideState.state3;
+                isSuccess = false;
+            }
         }
-
-        //// ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®
-        //if (isSuccess)
-        //{
-        //    StarRay.instance.transfort(starList[0]);
-        //    KJH_StarColorChange.instance.HttpStarColorChange(starList[0]);
-        //    isSuccess = false;
-        //}
+        
     }
 
     void CallBack(DownloadHandler downloadHandler)
@@ -176,14 +181,12 @@ public class KJH_DrawConstellation : MonoBehaviour
         isSuccess = true;
 
         KJH_StarColorChange.instance.HttpStarColorChange(starList[co.cord]);
-
-        
+        StarGuide.Instance.guideState = StarGuide.GuideState.state3;
         StarRay.instance.transfort(starList[co.cord]);
-        KJH_AudioPlay.instance.PlaySound(co.cord);
-        AlphaChange.instance.getIndex(co.cord);
+
     }
 
-    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
+    // ¸ðµç º°ÀÚ¸® ±×¸®±â
     public void DrawStarAll(List<float> ra, List<float> dec)
     {
         GameObject go = Instantiate(temp);
@@ -195,10 +198,10 @@ public class KJH_DrawConstellation : MonoBehaviour
         {
             GameObject star = Instantiate(starFactory);
             star.transform.parent = go.transform;
-            // ï¿½ï¿½ï¿½ï¿½ : -> ï¿½ï¿½ï¿½×¸ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            // Àû°æ : -> µð±×¸® -> ¶óµð¾ÈÀ¸·Î
             ra[i] = ra[i] * -15f * Mathf.PI / 180;
 
-            // ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½×¸ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            // ÀûÀ§ : µð±×¸® -> ¶óµð¾È
             dec[i] = dec[i] * (Mathf.PI / 180);
             dec[i] = (Mathf.PI / 2) - dec[i];
 
@@ -212,46 +215,4 @@ public class KJH_DrawConstellation : MonoBehaviour
             star.transform.position = Vector3.zero + new Vector3(x, y, z);
         }
     }
-
-    //// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
-    //public void HttpStarColorChange(GameObject stars, int index)
-    //{
-    //    for(int i=0; i<stars.transform.childCount; i++)
-    //    {
-
-    //    }
-    //}
-
-
-
-
-    //public void DrawStarHttp(List<float> ra, List<float> dec, string name)
-    //{
-    //    GameObject go = Instantiate(temp);
-    //    go.transform.position = Vector3.zero;
-    //    go.name = name;
-
-
-
-
-    //    for (int i = 0; i < ra.Count; i++)
-    //    {
-    //        GameObject star = Instantiate(httpStarFactory);
-    //        star.transform.parent = go.transform;
-    //        // ï¿½ï¿½ï¿½ï¿½ : -> ï¿½ï¿½ï¿½×¸ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    //        ra[i] = ra[i] * -15f * Mathf.PI / 180;
-
-    //        // ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½×¸ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    //        dec[i] = dec[i] * (Mathf.PI / 180);
-    //        dec[i] = (Mathf.PI / 2) - dec[i];
-
-    //        var rr = r * Mathf.Sin(dec[i]);
-    //        float z = rr * Mathf.Cos(ra[i]);
-    //        float x = rr * Mathf.Sin(ra[i]);
-    //        float y = r * Mathf.Cos(dec[i]);
-
-    //        star.transform.position = Vector3.zero + new Vector3(x, y, z);
-    //        //star.transform.position = new Vector3(x, y, z);
-    //    }
-    //}
 }

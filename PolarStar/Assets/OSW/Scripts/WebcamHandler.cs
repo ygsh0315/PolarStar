@@ -141,23 +141,29 @@ public class WebcamHandler : MonoBehaviour
         }
         return null;
     }
+    public bool isDownAlpha2 = false;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if(StarGuide.Instance.guideState == StarGuide.GuideState.state5)
         {
-            HTTPRequester hTTPRequester = new HTTPRequester();
-            hTTPRequester.url = "https://a1f2-110-70-51-37.jp.ngrok.io/get_picture";
-            //hTTPRequester.url = URL.instance.sendImage;
-            hTTPRequester.requestType = RequestType.POST;
-            hTTPRequester.postData = "aa";// GetTextureInfo();
-            hTTPRequester.postArray = GetTextureInfo();
-            hTTPRequester.onComplete = CallBack; 
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                isDownAlpha2 = true;
+            
+                HTTPRequester hTTPRequester = new HTTPRequester();
+                hTTPRequester.url = "https://a1f2-110-70-51-37.jp.ngrok.io/get_picture";
+                //hTTPRequester.url = URL.instance.sendImage;
+                hTTPRequester.requestType = RequestType.POST;
+                hTTPRequester.postData = "aa";// GetTextureInfo();
+                hTTPRequester.postArray = GetTextureInfo();
+                hTTPRequester.onComplete = CallBack; 
 
 
-            HTTPManager.instance.SendRequest(hTTPRequester);
+                HTTPManager.instance.SendRequest(hTTPRequester);
 
-            StartCoroutine(GetTexture());
+                StartCoroutine(GetTexture());
+            }
         }
     }
 
