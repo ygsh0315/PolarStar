@@ -19,6 +19,7 @@ public class KJH_DrawConstellation : MonoBehaviour
     public float r; // 천구의 반지름
     public GameObject temp;
 
+    
     public bool isSuccess = false;
 
     // 별자리 이름
@@ -144,27 +145,32 @@ public class KJH_DrawConstellation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (StarGuide.Instance.guideState == StarGuide.GuideState.state1)
         {
-            StarGuide.Instance.guideState = StarGuide.GuideState.state2;
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                StarGuide.Instance.guideState = StarGuide.GuideState.state2;
 
-            HTTPRequester hTTPRequester = new HTTPRequester();
+                HTTPRequester hTTPRequester = new HTTPRequester();
 
-            hTTPRequester.url = "https://a1f2-110-70-51-37.jp.ngrok.io/getcord";
-            //hTTPRequester.url = URL.vo;
-            hTTPRequester.requestType = RequestType.GET;
-            hTTPRequester.onComplete = CallBack;
+                hTTPRequester.url = "https://a1f2-110-70-51-37.jp.ngrok.io/getcord";
+                //hTTPRequester.url = URL.vo;
+                hTTPRequester.requestType = RequestType.GET;
+                hTTPRequester.onComplete = CallBack;
 
-            HTTPManager.instance.SendRequest(hTTPRequester);
+                HTTPManager.instance.SendRequest(hTTPRequester);
+            }
+
+            // 통신 테스트
+            if (isSuccess)
+            {
+                StarRay.instance.transfort(starList[0]);
+                KJH_StarColorChange.instance.HttpStarColorChange(starList[0]);
+                StarGuide.Instance.guideState = StarGuide.GuideState.state3;
+                isSuccess = false;
+            }
         }
-
-        //// 통신 테스트
-        //if (isSuccess)
-        //{
-        //    StarRay.instance.transfort(starList[0]);
-        //    KJH_StarColorChange.instance.HttpStarColorChange(starList[0]);
-        //    isSuccess = false;
-        //}
+        
     }
 
     void CallBack(DownloadHandler downloadHandler)
@@ -209,46 +215,4 @@ public class KJH_DrawConstellation : MonoBehaviour
             star.transform.position = Vector3.zero + new Vector3(x, y, z);
         }
     }
-
-    //// 통신 받은 별자리의 색상 변경하기
-    //public void HttpStarColorChange(GameObject stars, int index)
-    //{
-    //    for(int i=0; i<stars.transform.childCount; i++)
-    //    {
-
-    //    }
-    //}
-
-
-
-
-    //public void DrawStarHttp(List<float> ra, List<float> dec, string name)
-    //{
-    //    GameObject go = Instantiate(temp);
-    //    go.transform.position = Vector3.zero;
-    //    go.name = name;
-
-
-
-
-    //    for (int i = 0; i < ra.Count; i++)
-    //    {
-    //        GameObject star = Instantiate(httpStarFactory);
-    //        star.transform.parent = go.transform;
-    //        // 적경 : -> 디그리 -> 라디안으로
-    //        ra[i] = ra[i] * -15f * Mathf.PI / 180;
-
-    //        // 적위 : 디그리 -> 라디안
-    //        dec[i] = dec[i] * (Mathf.PI / 180);
-    //        dec[i] = (Mathf.PI / 2) - dec[i];
-
-    //        var rr = r * Mathf.Sin(dec[i]);
-    //        float z = rr * Mathf.Cos(ra[i]);
-    //        float x = rr * Mathf.Sin(ra[i]);
-    //        float y = r * Mathf.Cos(dec[i]);
-
-    //        star.transform.position = Vector3.zero + new Vector3(x, y, z);
-    //        //star.transform.position = new Vector3(x, y, z);
-    //    }
-    //}
 }

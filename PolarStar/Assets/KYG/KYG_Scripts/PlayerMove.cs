@@ -26,11 +26,14 @@ public class PlayerMove : MonoBehaviour
 
     int jumpCount = 0;
     public int maxJumpCount = 2;
-    // Start is called before the first frame update
+
+    AudioSource audioSource;
+    public string sound;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        audioSource = GetComponent<AudioSource>();
     }
     public float h;
     public float v;
@@ -73,6 +76,15 @@ public class PlayerMove : MonoBehaviour
         dir += yVelocity;
         // up 방향 맞춰주기
         rb.velocity = dir * speed;
+
+        if(dir != Vector3.zero)
+        {
+            if (!audioSource.isPlaying) audioSource.Play();
+        }
+        else
+        {
+            if(audioSource.isPlaying) audioSource.Stop();
+        }
        
         
         // 중력적용
@@ -87,4 +99,13 @@ public class PlayerMove : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + gravityDir * 5, Color.red);
 
     }
+
+    //void AudioPlay()
+    //{
+    //    // 리소스에서 비트(Beat) 음악 파일을 불러와 재생시키고 싶다.
+    //    AudioClip audio = Resources.Load<AudioClip>("Audio/" + sound);
+    //    audioSource = GetComponent<AudioSource>();
+    //    audioSource.clip = audio;
+    //    audioSource.Play();
+    //}
 }
