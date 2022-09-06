@@ -159,13 +159,21 @@ public class KJH_DrawConstellation : MonoBehaviour
             HTTPManager.instance.SendRequest(hTTPRequester);
         }
 
-        //// ���� �׽�Ʈ
-        //if (isSuccess)
-        //{
-        //    StarRay.instance.transfort(starList[0]);
-        //    KJH_StarColorChange.instance.HttpStarColorChange(starList[0]);
-        //    isSuccess = false;
-        //}
+        // 임시 통신
+        if (isSuccess)
+        {
+            // 상태 전이
+            StarGuide.Instance.guideState = StarGuide.GuideState.state3;
+
+            // 양자리로 테스트
+            StarRay.instance.transfort(starList[0]);
+            KJH_StarColorChange.instance.HttpStarColorChange(starList[0]);
+            KJH_AudioPlay.instance.PlaySound(0);
+            AlphaChange.instance.getIndex(0);
+
+            isSuccess = false;
+
+        }
     }
 
     void CallBack(DownloadHandler downloadHandler)
@@ -177,7 +185,7 @@ public class KJH_DrawConstellation : MonoBehaviour
 
         KJH_StarColorChange.instance.HttpStarColorChange(starList[co.cord]);
 
-        StarGuide.Instance.guideState = StarGuide.GuideState.state3;
+        //StarGuide.Instance.guideState = StarGuide.GuideState.state3;
         StarRay.instance.transfort(starList[co.cord]);
         KJH_AudioPlay.instance.PlaySound(co.cord);
         AlphaChange.instance.getIndex(co.cord);

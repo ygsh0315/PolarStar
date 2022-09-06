@@ -8,7 +8,7 @@ public class AlphaChange : MonoBehaviour
     public static AlphaChange instance;
     //Color color = new Color(1, 1, 1, 0);
     Color targetColor = new Color(1, 1, 1, 0.4f);
-    bool isColorChange = false;
+    public bool isColorChange = false;
     Quaternion originRotation;
 
     KJH_AudioPlay ap;

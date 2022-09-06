@@ -19,7 +19,7 @@ public class StarGuide : MonoBehaviour
     public string S_1Text = "1번 키를 눌러 찾고싶은 별자리를 말해주세요!";
     public string S_2Text = "음성 인식 중...";
     public string S_3Text = "별자리를 찾았습니다! 고개를 들어 하늘을 바라보세요!";
-    public string S_4Text = "오디오 재생중";
+    public string S_4Text = "오디오 재생 중...";
     public string S_5Text = "2번 키를 눌러 별자리와 사진을 찍어보세요!";
     public Image GuideBar;
     public Text guideText;
@@ -105,16 +105,31 @@ public class StarGuide : MonoBehaviour
         //guideState = GuideState.state3;
     }
 
+    float audioDelayTime = 3f;
     private void state3()
     {
         guideText.text = S_3Text;
         //guideState = GuideState.state4;
+
+        currentTime += Time.deltaTime;
+        if (currentTime > audioDelayTime)
+        {
+            guideState = GuideState.state4;
+            currentTime = 0;
+        }
     }
 
+    // 오디오 재생 중
     private void state4()
     {
         guideText.text = S_4Text;
-        //guideState = GuideState.state5;
+        // 오디오 끝나면 상태 전이
+        // --> 오디오 끝나면 이미지 매쉬 바뀔거임
+        if (AlphaChange.instance.isColorChange)
+        {
+            guideState = GuideState.state5;
+        }
+        
     }
 
     private void state5()
