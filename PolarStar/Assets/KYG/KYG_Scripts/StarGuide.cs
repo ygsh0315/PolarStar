@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StarGuide : MonoBehaviour
@@ -33,7 +34,7 @@ public class StarGuide : MonoBehaviour
     public GuideState guideState;
 
     public WebcamHandler web;
-
+    public RawImage rawImage;
 
     // 싱글톤으로 사용
     public static StarGuide Instance;
@@ -113,19 +114,20 @@ public class StarGuide : MonoBehaviour
         }
     }
 
+    // 1번을 눌러줘
     private void state1()
     {
         //currentTime += Time.deltaTime;
         S_1Image.enabled = true;
-        //if(currentTime > 2f)
-        //{
-        //guideState = GuideState.state2;
-        //}
-        // StartCoroutine("FadeOut");
-        //guideText.text = S_1Text;
-        //StartCoroutine("FadeIn");
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            // 통신
+            KJH_DrawConstellation.instance.Http();
+        }
     }
 
+    // 음성인식 중
     private void state2()
     {
         S_1Image.enabled = false;
@@ -134,6 +136,7 @@ public class StarGuide : MonoBehaviour
         //guideState = GuideState.state3;
     }
 
+    // 별자리를 봐
     float audioDelayTime = 3f;
     private void state3()
     {
@@ -167,7 +170,7 @@ public class StarGuide : MonoBehaviour
         //}
 
     }
-
+    // 2번키를 누르면 사진을 찍을 수 있어
     private void state5()
     {
         S_5Image.enabled = true;
@@ -176,26 +179,18 @@ public class StarGuide : MonoBehaviour
         if (web.isDownAlpha2)
         {
             S_5Image.enabled = false;
-            guideState = GuideState.Idle;
+
+            //currentTime += Time.deltaTime;
+
+            //if (currentTime > 4f)
+            //{
+            //    web.isDownAlpha2 = false;
+            //    rawImage.enabled = false;
+            //    guideState = GuideState.state1;
+
+            //    currentTime = 0f;
+
+            //}
         }
     }
-
-    //public IEnumerator FadeOut()
-    //{
-    //    for (float i = 0; i <= 0.5f; i += Time.deltaTime / 7)
-    //    {
-    //        GuideBar.color = new Color(0, 0, 0, i);
-    //        guideText.color = new Color(1, 1, 1, 2 * i);
-    //        yield return null;
-    //    }
-    //}
-    //public IEnumerator FadeIn()
-    //{
-    //    for (float i = 0.5f; i >= 0; i -= Time.deltaTime / 7)
-    //    {
-    //        GuideBar.color = new Color(0, 0, 0, i);
-    //        guideText.color = new Color(1, 1, 1, 2 * i);
-    //        yield return null;
-    //    }
-    //}
 }

@@ -152,7 +152,7 @@ public class WebcamHandler : MonoBehaviour
                 isDownAlpha2 = true;
             
                 HTTPRequester hTTPRequester = new HTTPRequester();
-                hTTPRequester.url = "https://a1f2-110-70-51-37.jp.ngrok.io/get_picture";
+                hTTPRequester.url = "https://a5f3-2001-2d8-e294-a769-b91e-b8f0-a69f-1491.jp.ngrok.io/get_picture";
                 //hTTPRequester.url = URL.instance.sendImage;
                 hTTPRequester.requestType = RequestType.POST;
                 hTTPRequester.postData = "aa";// GetTextureInfo();
@@ -195,7 +195,7 @@ public class WebcamHandler : MonoBehaviour
 
         rawImage.enabled = true;
 
-        Uri address = new Uri("https://a1f2-110-70-51-37.jp.ngrok.io/static/image/result.jpg");
+        Uri address = new Uri("https://a5f3-2001-2d8-e294-a769-b91e-b8f0-a69f-1491.jp.ngrok.io/static/image/result.jpg");
         //Uri address = new Uri(URL.instance.receiveImage);
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(address);
         yield return www.SendWebRequest();

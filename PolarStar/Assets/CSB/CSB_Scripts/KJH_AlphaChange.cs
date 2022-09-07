@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class AlphaChange : MonoBehaviour
+public class KJH_AlphaChange : MonoBehaviour
 {
-    public static AlphaChange instance;
-    Color color = new Color(1, 1, 1, 0);
+    public static KJH_AlphaChange instance;
+    Color curColor = new Color(1, 1, 1, 0);
     Color targetColor = new Color(1, 1, 1, 0.3f);
     public bool isColorChange = false;
     Quaternion originRotation;
@@ -30,7 +30,7 @@ public class AlphaChange : MonoBehaviour
 
 
         // alpha 변경
-        transform.GetComponent<SpriteRenderer>().color = color;
+        transform.GetComponent<SpriteRenderer>().color = curColor;
         ap = GetComponent<KJH_AudioPlay>();
     }
 
@@ -47,21 +47,22 @@ public class AlphaChange : MonoBehaviour
                 ap.source.Stop();
                 StarGuide.Instance.S_4Image.enabled = false;
                 isColorChange = true;
+                ap.isStartSound = false;
             }
         }
 
         if (isColorChange)
         {
-            color = Color.Lerp(color, targetColor, Time.deltaTime * 0.4f);
+            curColor = Color.Lerp(curColor, targetColor, Time.deltaTime * 0.4f);
 
-            if (color.a > 0.25f)
+            if (curColor.a > 0.25f)
             {
-                color = targetColor;
+                curColor = targetColor;
                 isColorChange = false;
                 StarGuide.Instance.guideState = StarGuide.GuideState.state5;
             }
 
-            GetComponent<SpriteRenderer>().color = color;
+            GetComponent<SpriteRenderer>().color = curColor;
         }
 
         //if (StarGuide.Instance.guideState == StarGuide.GuideState.state4)
@@ -71,6 +72,12 @@ public class AlphaChange : MonoBehaviour
         //    PlusAlpha();
         //}
     }
+
+
+    // 자식 오브젝트의 Color를 변경하고 싶다.
+    // index를 전달받아야 한다.
+    // 필요속성 : 전달받은 인덱스에 해당하는 image, 통신받을 때 받은 index, 
+
 
     //void PlusAlpha()
     //{

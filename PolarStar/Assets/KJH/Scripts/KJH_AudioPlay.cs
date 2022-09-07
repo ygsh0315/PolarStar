@@ -32,23 +32,24 @@ public class KJH_AudioPlay : MonoBehaviour
     }
     public void PlaySound(int index)
     {
-            source = parent.GetChild(index).GetComponent<AudioSource>();
+        // 전달받은 인덱스에 해당하는 audiosource 가져오기
 
-            if (!source.isPlaying)
+        //AudioSource source = transform.GetChild(index).GetComponent<AudioSource>();
+        source = parent.GetChild(index).GetComponent<AudioSource>();
+
+        if (!source.isPlaying)
+        {
+            print("audio index : " + index);
+
+            if (index > 11)
             {
-                print("audio index : " + index);
-
-                if (index > 11)
-                {
-                    print("오디오 없음");
-                    return;
-                }
-
-                source.Play();
-
-                isStartSound = true;
+                print("오디오 없음");
+                return;
             }
-        //}
+
+            source.Play();
+            isStartSound = true;
+        }
     }
 
 }
