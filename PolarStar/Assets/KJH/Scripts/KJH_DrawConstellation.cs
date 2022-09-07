@@ -175,7 +175,7 @@ public class KJH_DrawConstellation : MonoBehaviour
     }
 
     // Ã³³àÀÚ¸®
-    public int audioIndex = 5;
+    public int audioIndex = -1;
 
     void CallBack(DownloadHandler downloadHandler)
     {

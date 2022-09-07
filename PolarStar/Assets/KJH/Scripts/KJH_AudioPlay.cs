@@ -48,7 +48,6 @@ public class KJH_AudioPlay : MonoBehaviour
 
                 isStartSound = true;
             }
-        //}
     }
 
 }

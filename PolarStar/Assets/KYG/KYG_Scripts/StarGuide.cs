@@ -180,6 +180,10 @@ public class StarGuide : MonoBehaviour
         }
     }
 
+    public void FadeOut()
+    {
+        // 이미지를 천천히 사라지게 하고싶다.
+    }
     //public IEnumerator FadeOut()
     //{
     //    for (float i = 0; i <= 0.5f; i += Time.deltaTime / 7)

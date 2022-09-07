@@ -9,7 +9,9 @@ public class AlphaChange : MonoBehaviour
     Color color = new Color(1, 1, 1, 0);
     Color targetColor = new Color(1, 1, 1, 0.3f);
     public bool isColorChange = false;
-    Quaternion originRotation;
+    //Quaternion originRotation;
+
+    Transform parent;
 
     KJH_AudioPlay ap;
 
@@ -24,7 +26,8 @@ public class AlphaChange : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        originRotation = transform.rotation;
+        parent = transform.parent;
+
         transform.forward = Vector3.zero - transform.position;
 
         // alpha º¯°æ
@@ -32,6 +35,7 @@ public class AlphaChange : MonoBehaviour
         ap = GetComponent<KJH_AudioPlay>();
     }
 
+    AudioSource source;
     float curTime = 0f;
     // Update is called once per frame
     void Update()
