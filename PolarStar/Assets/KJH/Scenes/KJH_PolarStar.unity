@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e3144c0b9a148b0630b94adc897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorChange: 0
 --- !u!82 &103262053
 AudioSource:
   m_ObjectHideFlags: 0
@@ -804,6 +805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e3144c0b9a148b0630b94adc897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorChange: 0
 --- !u!82 &685041501
 AudioSource:
   m_ObjectHideFlags: 0
@@ -998,6 +1000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e3144c0b9a148b0630b94adc897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorChange: 0
 --- !u!82 &705986411
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1192,6 +1195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e3144c0b9a148b0630b94adc897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorChange: 0
 --- !u!82 &874852243
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1386,6 +1390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e3144c0b9a148b0630b94adc897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorChange: 0
 --- !u!82 &890301599
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1690,6 +1695,7 @@ MonoBehaviour:
   yVelocity: {x: 0, y: 0, z: 0}
   jumpPower: 5
   maxJumpCount: 2
+  sound: 
   h: 0
   v: 0
 --- !u!54 &1019066312
@@ -1847,7 +1853,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186665072}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 725907c0d73f92141b7a894bd8332a1c, type: 3}
   m_Name: 
@@ -1881,7 +1887,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186665072}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da02eeb6167c1c7429d0564dabb84189, type: 3}
   m_Name: 
@@ -2018,6 +2024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e3144c0b9a148b0630b94adc897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorChange: 0
 --- !u!82 &1195136544
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2146,6 +2153,7 @@ MonoBehaviour:
   objectTarget: {fileID: 1023729653}
   resultTexture: {fileID: 650875964}
   rawImage: {fileID: 650875964}
+  isDownAlpha2: 0
 --- !u!4 &1211156309
 Transform:
   m_ObjectHideFlags: 0
@@ -2259,6 +2267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e3144c0b9a148b0630b94adc897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorChange: 0
 --- !u!82 &1344814404
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2514,18 +2523,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62f4e0002a704dc4d9cdb50963331e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startText: "\uD658\uC601\uD569\uB2C8\uB2E4!!"
-  S_1Text: "1\uBC88 \uD0A4\uB97C \uB20C\uB7EC \uCC3E\uACE0\uC2F6\uC740 \uBCC4\uC790\uB9AC\uB97C
-    \uB9D0\uD574\uC8FC\uC138\uC694!"
-  S_2Text: "\uC74C\uC131 \uC778\uC2DD \uC911..."
-  S_3Text: "\uBCC4\uC790\uB9AC\uB97C \uCC3E\uC558\uC2B5\uB2C8\uB2E4! \uACE0\uAC1C\uB97C
-    \uB4E4\uC5B4 \uD558\uB298\uC744 \uBC14\uB77C\uBCF4\uC138\uC694!"
-  S_4Text: "\uC624\uB514\uC624 \uC7AC\uC0DD\uC911"
-  S_5Text: "2\uBC88 \uD0A4\uB97C \uB20C\uB7EC \uBCC4\uC790\uB9AC\uC640 \uC0AC\uC9C4\uC744
-    \uCC0D\uC5B4\uBCF4\uC138\uC694!"
   GuideBar: {fileID: 508319739}
-  guideText: {fileID: 1836941187}
+  startImage: {fileID: 0}
+  S_1Image: {fileID: 0}
+  S_2Image: {fileID: 0}
+  S_3Image: {fileID: 0}
+  S_4Image: {fileID: 0}
+  S_5Image: {fileID: 0}
   guideState: 0
+  web: {fileID: 0}
 --- !u!1 &1560525393
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,6 +2630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e3144c0b9a148b0630b94adc897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorChange: 0
 --- !u!82 &1560525397
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2818,6 +2825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e3144c0b9a148b0630b94adc897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorChange: 0
 --- !u!82 &1598678583
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3012,6 +3020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e3144c0b9a148b0630b94adc897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorChange: 0
 --- !u!82 &1683983586
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3250,6 +3259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e3144c0b9a148b0630b94adc897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorChange: 0
 --- !u!82 &1829743993
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3524,6 +3534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e3144c0b9a148b0630b94adc897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorChange: 0
 --- !u!82 &1971394910
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3691,6 +3702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e3144c0b9a148b0630b94adc897e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorChange: 0
 --- !u!1 &2091461352
 GameObject:
   m_ObjectHideFlags: 0

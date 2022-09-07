@@ -161,28 +161,33 @@ public class KJH_DrawConstellation : MonoBehaviour
                 HTTPManager.instance.SendRequest(hTTPRequester);
             }
 
-            // 통신 테스트
-            if (isSuccess)
-            {
-                StarRay.instance.transfort(starList[0]);
-                KJH_StarColorChange.instance.HttpStarColorChange(starList[0]);
-                StarGuide.Instance.guideState = StarGuide.GuideState.state3;
-                isSuccess = false;
-            }
         }
-        
+        // 통신 테스트
+        if (isSuccess)
+        {
+            StarRay.instance.transfort(starList[audioIndex]);
+            KJH_StarColorChange.instance.HttpStarColorChange(starList[audioIndex]);
+            StarGuide.Instance.guideState = StarGuide.GuideState.state3;
+
+            isSuccess = false;
+        }
+
     }
+
+    // 처녀자리
+    public int audioIndex = 5;
 
     void CallBack(DownloadHandler downloadHandler)
     {
         Constellation co = JsonUtility.FromJson<Constellation>(downloadHandler.text);
         print(co.name);
-        print(co.cord);
-        isSuccess = true;
+        print(co.index);
+        audioIndex = co.index;
+        //isSuccess = true;
 
-        KJH_StarColorChange.instance.HttpStarColorChange(starList[co.cord]);
+        KJH_StarColorChange.instance.HttpStarColorChange(starList[co.index]);
         StarGuide.Instance.guideState = StarGuide.GuideState.state3;
-        StarRay.instance.transfort(starList[co.cord]);
+        StarRay.instance.transfort(starList[co.index]);
 
     }
 

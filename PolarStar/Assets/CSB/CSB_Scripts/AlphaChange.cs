@@ -25,27 +25,25 @@ public class AlphaChange : MonoBehaviour
     void Start()
     {
         originRotation = transform.rotation;
-
         transform.forward = Vector3.zero - transform.position;
 
         // alpha º¯°æ
         transform.GetComponent<SpriteRenderer>().color = color;
         ap = GetComponent<KJH_AudioPlay>();
     }
+
     float curTime = 0f;
     // Update is called once per frame
     void Update()
     {
         if (ap.isStartSound)
         {
-            //isColorChange = true;
-
             curTime += Time.deltaTime;
 
             if (curTime > ap.source.clip.length)
-            //if(curTime > 5f)
             {
                 ap.source.Stop();
+                StarGuide.Instance.S_4Image.enabled = false;
                 isColorChange = true;
             }
         }
@@ -58,14 +56,10 @@ public class AlphaChange : MonoBehaviour
             {
                 color = targetColor;
                 isColorChange = false;
-
-                //KJH_SceneManager.instance.LoadWebCamScene();
+                StarGuide.Instance.guideState = StarGuide.GuideState.state5;
             }
 
             GetComponent<SpriteRenderer>().color = color;
-
-            
-            
         }
     }
 }

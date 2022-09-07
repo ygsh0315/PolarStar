@@ -147,6 +147,7 @@ public class StarGuide : MonoBehaviour
         {
             S_3Image.enabled = false;
             guideState = GuideState.state4;
+            KJH_AudioPlay.instance.PlaySound(KJH_DrawConstellation.instance.audioIndex);
             currentTime = 0;
         }
     }
@@ -155,14 +156,15 @@ public class StarGuide : MonoBehaviour
     private void state4()
     {
         S_4Image.enabled = true;
+
         //guideText.text = S_4Text;
         // 오디오 끝나면 상태 전이
         // --> 오디오 끝나면 이미지 매쉬 바뀔거임
-        if (AlphaChange.instance.isColorChange)
-        {
-            S_4Image.enabled = false;
-            guideState = GuideState.state5;
-        }
+        //if (AlphaChange.instance.isColorChange)
+        //{
+        //    //S_4Image.enabled = false;
+        //    guideState = GuideState.state5;
+        //}
 
     }
 

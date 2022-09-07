@@ -11,17 +11,18 @@ public class KJH_AudioPlay : MonoBehaviour
     public static KJH_AudioPlay instance;
     public AudioSource source;
     public bool isStartSound = false;
+    Transform parent;
 
     private void Awake()
     {
-        if(!instance)
+        if (!instance)
             instance = this;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        source = GetComponent<AudioSource>();
+        parent = transform.parent;
     }
 
     // Update is called once per frame
@@ -31,11 +32,11 @@ public class KJH_AudioPlay : MonoBehaviour
     }
     public void PlaySound(int index)
     {
-        //if (KJH_DrawConstellation.instance.isSuccess)
-        //{
-            //if (!source.isPlaying)
-            //{
-                print(index);
+            source = parent.GetChild(index).GetComponent<AudioSource>();
+
+            if (!source.isPlaying)
+            {
+                print("audio index : " + index);
 
                 if (index > 11)
                 {
@@ -43,11 +44,10 @@ public class KJH_AudioPlay : MonoBehaviour
                     return;
                 }
 
-                source = transform.GetChild(index).GetComponent<AudioSource>();
                 source.Play();
 
                 isStartSound = true;
-            //}
+            }
         //}
     }
 
