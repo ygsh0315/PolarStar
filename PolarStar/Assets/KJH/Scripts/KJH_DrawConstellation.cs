@@ -145,33 +145,33 @@ public class KJH_DrawConstellation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (StarGuide.Instance.guideState == StarGuide.GuideState.state1)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Alpha1))
-        //    {
-        //        StarGuide.Instance.guideState = StarGuide.GuideState.state2;
+        if (StarGuide.Instance.guideState == StarGuide.GuideState.state1)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                StarGuide.Instance.guideState = StarGuide.GuideState.state2;
 
-        //        HTTPRequester hTTPRequester = new HTTPRequester();
+                HTTPRequester hTTPRequester = new HTTPRequester();
 
-        //        // 음성인식 주소 받기
-        //        hTTPRequester.url = "https://a5f3-2001-2d8-e294-a769-b91e-b8f0-a69f-1491.jp.ngrok.io/getcord";
-        //        //hTTPRequester.url = URL.vo;
-        //        hTTPRequester.requestType = RequestType.GET;
-        //        hTTPRequester.onComplete = CallBack;
+                // 음성인식 주소 받기
+                hTTPRequester.url = "https://a5f3-2001-2d8-e294-a769-b91e-b8f0-a69f-1491.jp.ngrok.io/getcord";
+                //hTTPRequester.url = URL.vo;
+                hTTPRequester.requestType = RequestType.GET;
+                hTTPRequester.onComplete = CallBack;
 
-        //        HTTPManager.instance.SendRequest(hTTPRequester);
-        //    }
+                HTTPManager.instance.SendRequest(hTTPRequester);
+            }
 
-        //}
-        // 통신 테스트
-        //if (isSuccess)
-        //{
-        //    StarRay.instance.transfort(starList[audioIndex]);
-        //    KJH_StarColorChange.instance.HttpStarColorChange(starList[audioIndex]);
-        //    StarGuide.Instance.guideState = StarGuide.GuideState.state3;
+        }
+        //통신 테스트
+        if (isSuccess)
+        {
+            StarRay.instance.transfort(starList[audioIndex]);
+            KJH_StarColorChange.instance.HttpStarColorChange(starList[audioIndex]);
+            StarGuide.Instance.guideState = StarGuide.GuideState.state3;
 
-        //    isSuccess = false;
-        //}
+            isSuccess = false;
+        }
 
     }
 
